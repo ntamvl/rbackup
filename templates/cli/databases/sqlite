@@ -1,0 +1,11 @@
+  ##
+  # SQLite [Database]
+  #
+  database SQLite do |db|
+    # Path to database file
+    db.path               = "/path/to/my/sqlite/db.sqlite"
+
+    # Optional: Use to set the location of this utility
+    #   if it cannot be found by name in your $PATH
+    db.sqlitedump_utility = "/opt/local/bin/sqlite3"
+  end
