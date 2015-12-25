@@ -48,7 +48,8 @@ module Backup
     end
 
     def time_as_object
-      Time.strptime(time, '%Y.%m.%d.%H.%M.%S')
+      # Time.strptime(time, '%Y.%m.%d.%H.%M.%S')
+      Time.strptime(time, '%Y/%m/%d')
     end
 
   end

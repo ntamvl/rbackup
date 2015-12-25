@@ -54,14 +54,19 @@ module Backup
       ##
       # Return the remote path for the current or given package.
       def remote_path(pkg = package)
-        path.empty? ? File.join(pkg.trigger, pkg.time) :
-                      File.join(path, pkg.trigger, pkg.time)
+        # path.empty? ? File.join(pkg.trigger, pkg.time) :
+        #               File.join(path, pkg.trigger, pkg.time)
+        time_value = '2015/12/25'
+        remote_path_value = path.empty? ? File.join(pkg.trigger, pkg.time) :
+                                          File.join(path, pkg.trigger, pkg.time)
+        puts "base remote_path: #{remote_path_value}"
+        return remote_path_value
       end
       alias :remote_path_for :remote_path
 
       def storage_name
         @storage_name ||= self.class.to_s.sub('Backup::', '') +
-            (storage_id ? " (#{ storage_id })" : '')
+          (storage_id ? " (#{ storage_id })" : '')
       end
 
     end

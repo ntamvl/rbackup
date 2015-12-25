@@ -30,9 +30,9 @@ module Backup
       # Called by the Cycler.
       # Any error raised will be logged as a warning.
       def remove!(package)
-        Logger.info "Removing backup package dated #{ package.time }..."
+        Logger.info "[Local] Removing backup package dated #{ package.time }..."
 
-        FileUtils.rm_r(remote_path_for(package))
+        # FileUtils.rm_r(remote_path_for(package))
       end
 
       # expanded since this is a local path

@@ -260,7 +260,8 @@ module Backup
     # the same trigger.
     def perform!
       @started_at = Time.now.utc
-      @time = package.time = started_at.strftime("%Y.%m.%d.%H.%M.%S")
+      # @time = package.time = started_at.strftime("%Y.%m.%d.%H.%M.%S")
+      @time = package.time = started_at.strftime("%Y/%m/%d")
 
       log!(:started)
       before_hook

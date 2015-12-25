@@ -11,6 +11,8 @@ module Backup
       # +username+ must be a PostgreSQL superuser to run `pg_dumpall`.
       attr_accessor :name
 
+      attr_accessor :filename_backup
+
       ##
       # Credentials for the specified database
       attr_accessor :username, :password
@@ -65,8 +67,8 @@ module Backup
 
         puts "Starting to dump..."
         puts "#{pgdump}"
-        puts "file_name: #{ name }"
-        dump_filename_pg = name
+        puts "file_name: #{ name } - filename_backup: #{filename_backup}"
+        dump_filename_pg = filename_backup || name
         pipeline << "#{ utility(:cat) } > " +
             "'#{ File.join(dump_path, dump_filename_pg) }.#{ dump_ext }'"
 
