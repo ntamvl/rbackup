@@ -65,9 +65,10 @@ module Backup
 
         puts "Starting to dump..."
         puts "#{pgdump}"
-
+        puts "file_name: #{ name }"
+        dump_filename_pg = name
         pipeline << "#{ utility(:cat) } > " +
-            "'#{ File.join(dump_path, dump_filename) }.#{ dump_ext }'"
+            "'#{ File.join(dump_path, dump_filename_pg) }.#{ dump_ext }'"
 
         pipeline.run
         if pipeline.success?
