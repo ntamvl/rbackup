@@ -65,9 +65,9 @@ module Backup
         #   dump_ext << ext
         # end if model.compressor
 
-        puts "Starting to dump..."
-        puts "#{pgdump}"
-        puts "file_name: #{ name } - filename_backup: #{filename_backup}"
+        Logger.info "Starting to dump..."
+        Logger.info "#{pgdump}"
+        Logger.info "file_name: #{ name } - filename_backup: #{filename_backup}"
         dump_filename_pg = filename_backup || name
         pipeline << "#{ utility(:cat) } > " +
             "'#{ File.join(dump_path, dump_filename_pg) }.#{ dump_ext }'"
