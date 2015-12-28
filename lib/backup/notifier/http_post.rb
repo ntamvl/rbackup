@@ -29,6 +29,8 @@ module Backup
       # e.g. { 'Authorization' => 'my_auth_info', 'User-Agent' => nil }
       attr_accessor :headers
 
+      attr_accessor :body
+
       ##
       # Hash of additional POST parameters to send.
       #
@@ -95,17 +97,26 @@ module Backup
       # : Notification will be sent if `on_warning` or `on_success` is `true`.
       #
       def notify!(status)
-        msg = message.call(model, :status => status_data_for(status))
+        # msg = message.call(model, :status => status_data_for(status))
+
+        # opts = {
+        #   :headers => { 'User-Agent' => "Backup/#{ VERSION }" }.
+        #       merge(headers).reject {|k,v| v.nil? }.
+        #       merge('Content-Type' => 'application/x-www-form-urlencoded'),
+        #   :body => URI.encode_www_form({ 'message' => msg }.
+        #       merge(params).reject {|k,v| v.nil? }.
+        #       merge('status' => status.to_s)),
+        #   :expects => success_codes # raise error if unsuccessful
+        # }
 
         opts = {
           :headers => { 'User-Agent' => "Backup/#{ VERSION }" }.
               merge(headers).reject {|k,v| v.nil? }.
               merge('Content-Type' => 'application/x-www-form-urlencoded'),
-          :body => URI.encode_www_form({ 'message' => msg }.
-              merge(params).reject {|k,v| v.nil? }.
-              merge('status' => status.to_s)),
+          :body => body,
           :expects => success_codes # raise error if unsuccessful
         }
+
         opts.merge!(:ssl_verify_peer => ssl_verify_peer) unless ssl_verify_peer.nil?
         opts.merge!(:ssl_ca_file => ssl_ca_file) if ssl_ca_file
 
