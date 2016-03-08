@@ -91,7 +91,7 @@ module Backup
         "#{ password_option }" +
         "#{ sudo_option }" +
         "#{ utility(:pg_dump) } #{ username_option } #{ connectivity_options } " +
-        "--format tar --blobs " +
+        "-Fc --blobs " +
         "#{ user_options } #{ name }"
       end
 
